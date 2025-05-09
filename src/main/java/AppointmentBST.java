@@ -11,7 +11,20 @@ public class AppointmentBST {
     }
 
     private AppointmentNode insertRec(AppointmentNode root, PatientAppointment appointment) {
-        // TODO: Implement logic to insert by appointment time (avoid duplicates)
+        if (root == null) {
+            return new AppointmentNode(appointment);
+        }
+
+        int comparison = appointment.getTime().compareTo(root.data.getTime());
+
+        if (comparison < 0) {
+            root.left = insertRec(root.left, appointment);
+        } else if (comparison > 0) {
+            root.right = insertRec(root.right, appointment);
+        } else {
+            System.out.println("Duplicate appointment time not allowed: " + appointment.getTime());
+        }
+
         return root;
     }
 
@@ -27,3 +40,4 @@ public class AppointmentBST {
         return root;
     }
 }
+
